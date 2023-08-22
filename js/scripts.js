@@ -2,51 +2,41 @@ $(document).ready(function () {
 
     /***************** Waypoints ******************/
 
-    $('.wp1').waypoint(function () {
-        $('.wp1').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp2').waypoint(function () {
-        $('.wp2').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
     $('.wp3').waypoint(function () {
         $('.wp3').addClass('animated fadeInLeft');
     }, {
         offset: '75%'
     });
-    $('.wp4').waypoint(function () {
-        $('.wp4').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
-    $('.wp5').waypoint(function () {
-        $('.wp5').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp6').waypoint(function () {
-        $('.wp6').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
+    // $('.wp4').waypoint(function () {
+    //     $('.wp4').addClass('animated fadeInRight');
+    // }, {
+    //     offset: '75%'
+    // });
+    // $('.wp5').waypoint(function () {
+    //     $('.wp5').addClass('animated fadeInLeft');
+    // }, {
+    //     offset: '75%'
+    // });
+    // $('.wp6').waypoint(function () {
+    //     $('.wp6').addClass('animated fadeInRight');
+    // }, {
+    //     offset: '75%'
+    // });
     $('.wp7').waypoint(function () {
         $('.wp7').addClass('animated fadeInUp');
     }, {
         offset: '75%'
     });
-    $('.wp8').waypoint(function () {
-        $('.wp8').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp9').waypoint(function () {
-        $('.wp9').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
+    // $('.wp8').waypoint(function () {
+    //     $('.wp8').addClass('animated fadeInLeft');
+    // }, {
+    //     offset: '75%'
+    // });
+    // $('.wp9').waypoint(function () {
+    //     $('.wp9').addClass('animated fadeInRight');
+    // }, {
+    //     offset: '75%'
+    // });
 
     /***************** Tooltips ******************/
     $('[data-toggle="tooltip"]').tooltip();
@@ -131,17 +121,45 @@ $(document).ready(function () {
     });
 
     /********************** RSVP **********************/
+    $(document).ready(function () {
+        // Add event listeners to pulledPork and pulledChicken inputs
+        $('#pulledPork, #pulledChicken').on('input', function () {
+            var pulledPork = parseInt($('#pulledPork').val()) || 0;
+            var pulledChicken = parseInt($('#pulledChicken').val()) || 0;
+            
+            // Calculate guest count based on pulled meat values
+            var guestCount = pulledPork + pulledChicken;
+            
+            // Update guest count input
+            $('#count').val(guestCount);
+        });
+    
+        // Add event listener to guest count input
+        $('#count').on('input', function () {
+            var guestCount = parseInt($(this).val()) || 0;
+            
+            // Calculate proportional pulled meat values
+            var pulledPork = Math.round(guestCount / 2);
+            var pulledChicken = guestCount - pulledPork;
+    
+            // Update pulled meat inputs
+            $('#pulledPork').val(pulledPork);
+            $('#pulledChicken').val(pulledChicken);
+        });
+    });
+    
+    
+
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
-            && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
+        if (MD5($('#invite_code').val()) !== '679e5d9b19a13e13f8403a496a916b4c') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbxgd74nZF0E-wXoAceYKiF0STkQ-DouNO_mSQOPbZyzcg8ZRsVunOfHOr5twxymmSk7/exec', data)
                 .done(function (data) {
                     console.log(data);
                     if (data.result === "error") {
@@ -157,7 +175,6 @@ $(document).ready(function () {
                 });
         }
     });
-
 });
 
 /********************** Extras **********************/

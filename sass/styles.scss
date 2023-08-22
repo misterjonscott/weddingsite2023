@@ -281,6 +281,18 @@ Hero
   }
   .hero-content {
     padding-top: 50%;
+    @media (min-width:640px) {
+      padding-top: 80%!important;
+    }
+    @media (min-width:800px) {
+      padding-top: 70%!important;
+    }
+    @media (min-width:900px) {
+      padding-top: 60%!important;
+    }
+    @media (min-width:1000px) {
+      padding-top: 50%!important;
+    }
   }
   .hero-content img {
     width: 55%;
@@ -616,23 +628,27 @@ Features-stack
 }
 
 /* ==========================================================================
-Invitation & Instagram
+Invitation
 ========================================================================== */
-#invitation, #instagram {
-  text-align: center;
-}
-
-#invitation {
-  padding: 2em;
-  h2 {
-    margin-top: 4em;
+#invitation-container {
+  #kjfl-opener {
+    text-align: center;
+    img {
+      width: 80%;
+      border-radius: 10px;
+    }
   }
-}
 
-#instagram {
-  img {
-    width: 100%;
+  #invitation {
+    text-align: center;
+    padding: 2em;
+    h2 {
+      margin-top: 2em;
+      padding: 0 1em;
+      font-size: 2em;
+    }
   }
+  
 }
 
 /* ==========================================================================
@@ -652,7 +668,14 @@ Engagement Pics
   }
 }
 
-
+/* ==========================================================================
+Insta Details
+========================================================================== */
+#instagram {
+  img {
+    height: 300px;
+  }
+}
 
 /* ==========================================================================
 Venue Details
